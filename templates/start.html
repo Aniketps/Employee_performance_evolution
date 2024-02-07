@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='start.css') }}">
+</head>
+<body>
+    <div class="container">
+        <br>
+        <center>{{ prediction_text }}</center>
+        <h1>Check your Promotion Probability</h1>
+        <form id="userInputForm" action="{{ url_for('predict')}}" method="post">
+            <label for="no_of_trainings">Number of Trainings you have done:</label>
+            <input type="number" id="no_of_trainings" name="no_of_trainings" required><br>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br>
+
+            <label for="previous_year_rating">Previous Year Rating(0 to 5):</label>
+            <input type="number" id="previous_year_rating" name="previous_year_rating" required><br>
+
+            <label for="length_of_service">Length of Service:</label>
+            <input type="number" id="length_of_service" name="length_of_service" required><br>
+
+            <label for="awards_won">Awards Won:</label>
+            <input type="number" id="awards_won" name="awards_won" required><br>
+
+            <label for="avg_training_score">Average Training Score:</label>
+            <input type="number" id="avg_training_score" name="avg_training_score" required><br>
+            
+            <center><button type="submit" id="predictButton">Predict</button></center>
+        </form>
+    </div>
+
+    <div class="chat-frame">
+        <div class="chat-header">
+            <h3>Chatbot</h3>
+        </div>
+        <div id="chatArea" class="chat-area">
+            <p>If you need help with any content in form just mention content name</p>
+            {% if bot_reply %}
+                <div class="bot-message">
+                    <p>{{ bot_reply }}</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="chat-input">
+            <form id="chatForm" action="{{ url_for('chat') }}" method="post">
+                <input type="text" id="userInput" name="message" placeholder="Type a message...">
+                <button type="submit" id="sendButton">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
